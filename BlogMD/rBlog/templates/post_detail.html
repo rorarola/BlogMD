@@ -1,0 +1,19 @@
+{% extends "base_with_postlist.html" %}
+
+{% block content %}
+<div>
+    <div>
+        <div>
+            <h1>{{ post.title }}</h1>
+            <div>{{ post.created_at|date:'Y / m / d' }}</div>
+            <a href="{% url 'post_remove' pk=post.pk %}">delete</a>
+            <a href="{% url 'post_edit' pk=post.pk %}">edit</a>
+        </div>
+        <div></div>
+        <div>
+            {{ post.text }}
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

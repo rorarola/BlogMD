@@ -13,15 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import include, path
-from django.views.generic import RedirectView
-# Use static() to add url mapping to serve static files during development (only)
-from django.conf import settings
-from django.conf.urls.static import static
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('rBlog/', include('rBlog.urls')),
-    path('', RedirectView.as_view(url='rBlog/')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('', views.index, name='index'),
+    path('post/<int:id>', views.postDetail, name='post-detail'),
+    path('post/new/', views.post_new, name='post_new'),
+    path('post/<pk>/remove/', views.post_remove, name='post_remove'),
+    path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
+]
