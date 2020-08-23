@@ -36,11 +36,10 @@ def post_new(request):
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
-            post = form.save(commit=False)
-            post.author = request.user
+            post.author = str(request.user)
             post.save()
             return redirect(post.get_absolute_url())
     else:
